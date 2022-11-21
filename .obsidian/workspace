@@ -1,0 +1,112 @@
+{
+  "main": {
+    "id": "75f9f54ab08f1668",
+    "type": "split",
+    "children": [
+      {
+        "id": "54bb44a1f175f147",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "前端框架/AngularJS/文件说明.md",
+            "mode": "source",
+            "source": false
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "33c83247f90d7eaf",
+    "type": "split",
+    "children": [
+      {
+        "id": "4f7a7a216913c80e",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "80a655dc479b4c6a",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "86ee9c3e8e7f901b",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 240.5,
+    "collapsed": true
+  },
+  "right": {
+    "id": "eae31176a4c920b8",
+    "type": "split",
+    "children": [
+      {
+        "id": "83dc37826d95820e",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "8975e579cb22a314",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "前端框架/AngularJS/文件说明.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": true,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "f626edefb9d1f41d",
+            "type": "leaf",
+            "state": {
+              "type": "advanced-tables-toolbar",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "54bb44a1f175f147",
+  "lastOpenFiles": [
+    "前端框架/AngularJS/4_三个页面语法.md",
+    "前端框架/AngularJS/文件说明.md",
+    "基础知识.md",
+    "javascrpit/入门基础.md",
+    "javascrpit/正则表达式.md",
+    "javascrpit/基础对象备忘.md",
+    "javascrpit/1数组.md",
+    "Java/Maven.md",
+    "css/1样式基础写法.md",
+    "css/选择器权值.md"
+  ]
+}
