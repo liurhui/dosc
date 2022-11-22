@@ -54,6 +54,10 @@ git push origin master
 git status
 //查看比较 迭代文件差异
 git diff file
+
+// 本地非空文件 放到缓存区
+git add .
+git status
 //"" 内写当前提交的描述  从缓冲区推到git仓库
 git commit -m "first commit"
 // 推送到仓库

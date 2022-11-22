@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "95f73a46be4b7327",
+        "id": "8c189e29d9be8e25",
         "type": "tabs",
         "children": [
           {
-            "id": "6eebf8d3b53b0602",
+            "id": "9b7d12e82b01f840",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -61,8 +61,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200,
-    "collapsed": true
+    "width": 200
   },
   "right": {
     "id": "eae31176a4c920b8",
@@ -105,17 +104,17 @@
     "width": 300,
     "collapsed": true
   },
-  "active": "6eebf8d3b53b0602",
+  "active": "9b7d12e82b01f840",
   "lastOpenFiles": [
-    "自己整理的js的面试问题.md",
-    "docker 基础篇.md",
-    "03-JavaScript高级.md",
-    "腾讯云 轻量服务器.md",
     "单片机/ESP8266/基础篇.md",
     "单片机/单片机通用常识.md",
-    "单片机/图片/ESP8266/ESP8266的GPIO对应的名称查表.PNG",
-    "单片机/图片/ESP8266/ESP8266的GPIO对应的名称.PNG",
     "单片机/水墨屏/README.md",
-    "javascrpit/1数组.md"
+    "终端/vscode.md",
+    "html/dom 基础.md",
+    "html/基础文件引入篇.md",
+    "Java/Maven.md",
+    "Java/学习网站汇总.md",
+    "javascrpit/1数组.md",
+    "javascrpit/正则表达式.md"
   ]
 }
