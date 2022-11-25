@@ -32,8 +32,8 @@ git checkout -- test1.txt
 初次从本地提交数据到git仓库
 ```c
 //设置用户名 及 邮箱账户  类似联系人和邮箱
-git config --global user.name "liurhui"
-git config --global user.email "liurhui2017@163.com"
+git config --global user.name "lxxxi"
+git config --global user.email "xxxxx@xx.com"
 
 git init
 //改为自己的仓库
