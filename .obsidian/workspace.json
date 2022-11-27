@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "790b104c78a43a04",
+        "id": "bdb5e888757f4104",
         "type": "tabs",
         "children": [
           {
-            "id": "bbf83a9b7223fd32",
+            "id": "dbb0ea8203192c86",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -104,12 +104,12 @@
     "width": 300,
     "collapsed": true
   },
-  "active": "bbf83a9b7223fd32",
+  "active": "dbb0ea8203192c86",
   "lastOpenFiles": [
     "单片机/ESP8266/基础篇.md",
+    "单片机/水墨屏/README.md",
     "终端/git入门.md",
     "单片机/单片机通用常识.md",
-    "单片机/水墨屏/README.md",
     "终端/vscode.md",
     "html/dom 基础.md",
     "html/基础文件引入篇.md",
