@@ -1,3 +1,114 @@
+### 关键词
+constant常量
+variable变量
+dictionary字典
+integer整数,整形
+keyword关键字
+static静态的
+class类
+subclass子类
+superclass父类
+inherit继承
+
+initial最初的
+initializer初始化方法
+initialization初始化
+deinitializer析构方法
+encapsulate封装
+protocol协设
+delegate代理
+delegation代理
+extend拓展
+extonsion拓展
+
+external外部的
+collection集合
+execute执行
+loop循环
+downcast向下转型
+unwrap拆箱
+force-unwrap强制拆箱
+statement声明
+optional可选的
+
+global全局的
+closure闭包
+allocate分配
+memory内存
+reference引用
+observe观察
+observer观察者
+modify修改
+format格式
+sort排序
+
+code snippet  代码片段
+define 定义
+definition 定义
+contain包含
+query 查询
+particular 特定的
+type casting  类型转换
+cast 转换
+operator 操作符
+hierarchy 层次体系
+
+inheritance继承
+polymorphism多态
+interface接口
+structure结构
+instance实例
+property属性
+enumeration枚举
+function函数
+parameter参数
+functionality功能
+
+method 方法
+element 元素
+call 调用
+random 随机的
+generate 产生,生成
+generator 生成器
+implement 实现
+parameter 参数
+expression  表达式
+scope 范围,区域
+
+generic  范型
+collection 集合
+swap  交换
+original 初始的
+compile 编译
+override 重写
+overload 复写重载
+index 索引
+syntax 语法
+
+nested 嵌套的
+reuse 复用,重用
+entity 实体
+public 公共的,公开的
+private 私有的
+internal 内部的
+framework  框架
+unit test  单元测试
+associate  关联
+item 每一项
+
+subscript 脚本
+comma 冒号
+access 访问,获取
+cover 涵盖,覆盖
+assign 赋值
+assignment  赋值
+commit 提交
+comment 注释
+compatible 兼容
+compiler 编译器
+
+
+
 #### namespace 名字
 
 分配各自的空间不串扰 相同的函数名 调用时 区分是谁空间里的 函数
