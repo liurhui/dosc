@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "74ea57c12003fc89",
+        "id": "2cf02b06967b4395",
         "type": "tabs",
         "children": [
           {
-            "id": "0167de11afb78a74",
+            "id": "bf5af49ff2d34275",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -104,17 +104,17 @@
     "width": 300,
     "collapsed": true
   },
-  "active": "0167de11afb78a74",
+  "active": "bf5af49ff2d34275",
   "lastOpenFiles": [
+    "单片机/ESP8266/1_搭建环境.md",
+    "单片机/ESP8266/2_API备忘.md",
+    "README.md",
+    "nginx.md",
     "终端/node 常用指令.md",
+    "终端/IDE使用集合.md",
+    "终端/keil.md",
+    "终端/vscode.md",
     "面包屑.md",
-    "基础知识.md",
-    "03-JavaScript高级.md",
-    "javascrpit/url.md",
-    "javascrpit/正则表达式.md",
-    "javascrpit/问题.md",
-    "javascrpit/微任务宏任务.md",
-    "javascrpit/基础算法备忘.md",
-    "javascrpit/基础字符串备忘.md"
+    "基础知识.md"
   ]
 }

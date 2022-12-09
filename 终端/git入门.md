@@ -77,3 +77,13 @@ git reset --hard 0a73015
 git reflog
 git reset --hard 5896314
 ```
+
+
+拉取
+```plaintext
+1、ssh-keygen -t rsa -C "xxxx@xx.com"    然后一直回车就好 目的生成id.rsa.pub
+2、 进入官网  账户的 settings   的 SSH and GPG keys 把值复制到key  然Add SSH key  就可以进行 拉取
+
+git clone git@github.com:liurhui/dosc.git
+
+```

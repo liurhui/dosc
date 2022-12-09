@@ -3,342 +3,8 @@
 创建日期:
   -  2022/11/14
 ---
-## 搭建环境
-#### 版本说明
-	AiThinkerIDE_V0.5  配置环境能用
-	AiThinkerIDE_V1.0  忽略配置太过繁杂
-	AiThinkerIDE_V1.5  可以以替代0.5和1.0  比较好用推荐
-	区别：后面的带有自带添加环境变量。
-##### 0.5配置环境变量
-	自己创建 Espressif\IDE  把两个都放进去 然后去加环境变量
-	编辑环境变量选：系统变量 -> Path 新增 
-	`C:\Espressif\IDE\AiThinkerIDE_V0.5\cygwin\bin`
-	`C:\Espressif\IDE\xtensa-lx106-elf\bin`
-##### 1.5配置环境变量
-	直接参考安信可官方的文章（亲测可用）
-	https://blog.csdn.net/Boantong_/article/details/106229281
-
-#### 软件下载说明   qq群号 :434878850  (AI-物联网全栈开发之旅)
-	1、eclipes 其实下载了没有用，IDE已经自带了。估计是0.5版本需要。
-	2、编译链工具，主要是linux平台要用所以要整理，win的在IDE里基本都给了压缩包。
-	3、官方给的文件很散，还没网友整理的整齐。
-	4、半颗心脏的教程图不对文（很难参照），但是基本上流程是对的。所以不一定得按半颗心脏的文档去操作，可以看下别的网友的。
-	5、编译链文件是需要去配环境变量的，所以得手动根据版本进行替换bin路径。
-
-	1、eclipes for c/c++ 2019版本： 公众号 徐宏blog(半颗心脏)
-	https://pan.baidu.com/s/1Eqg0nu_fHSIVTwiFvLLijA 提取码：fqt7 
-	压缩包解压后是免安装的，配个项目存储位置后，根据文档去配置依赖。
-	
-	2、AThinkerIDE集合包 （b站网友提供的）
-	视频： https://www.bilibili.com/read/cv7760529/
-	https://pan.baidu.com/s/1Fu1Fen68SPfp0qzLvoxRRg 提取码: nsmn
-	配置：https://docs.ai-thinker.com/ai_ide_install?s[]=aithinkeride
-
-	3、cywin window： 都在 AThinkerIDE 包里或安装IDE后自带
-	安装后自带的需要在项目内配置下路径。
-	
-	4、2.0和3.0SDK 官方下载地址  包含了AThinkerIDE0.5版本的编译链
-	https://github.com/espressif/ESP8266_RTOS_SDK
-	AThinkerIDE0.5版本的编译链下载（点击立即下载）
-	https://dl.espressif.com/dl/xtensa-lx106-elf-win32-1.22.0-88-gde0bdc1-4.8.5.tar.gz
-
-#### 安信可 开发工具手册集合（Ai-ThinkerIDE_V1.5）
-https://docs.ai-thinker.com/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B72
-##### aithinker_serial_tool（串口调试工具 波特率选 74880）
-https://docs.ai-thinker.com/_media/tools/aithinker_serial_tool_v1.2.3.7z
-##### flash_download_tool（烧录工具）
-https://docs.ai-thinker.com/_media/flash_download_tool_v3.8.5_1.zip
-参照blog
-https://blog.csdn.net/qq_26043945/article/details/124623326
-
-**备忘：**
-	如果出现无法烧写  GPIO0 先通过接地一会放电后 然后板子上电（灯会闪烁一下），再点击开始下载 。至于com 口先上一次电记录下。
-	黑色的板要插电池，白色的不用。原因未知，这里利用了水墨屏的PCB刚好有8266的外围基础电路。所以可以省去买8266开发板。
-	
-**烧录bin根据SDK版本编译后生成两种烧录方式：**
-	1、带boot.bin的  2、不带boot.bin的
-	3、0x3fe000、0x3fc000、0x00000  地址基本固定，boot_v几 和 xx.bin 得看编译后 编辑器IDE面板的显示的来填写。
-**编译后生成bin示例**
-```plaintext
-!!!
-Support boot_v1.4 and +
-Generate user1.4096.new.6.bin successully in folder bin/upgrade.
-boot.bin------------>0x00000
-user1.4096.new.6.bin--->0x01000
-!!!
-make[1]: Leaving directory '/cygdrive/c/Users/81839/Desktop/github/StudyInEsp8266/3_TimerLED/app'
-```
-**不带boot.bin**
-烧录文件     烧录地址
-blank.bin        0x3fe000
-esp_init_data_default.bin        0x3fc000
-eagle.flash.bin        0x00000
-eagle.irom0text.bin         0x40000
-
-**带boot.bin**
-烧录文件   烧录地址
-blank.bin    0x3fe000
-esp_init_data_default.bin   0x3fc000
-boot.bin    0x00000
-user1.4096.new.6.bin    0x01000
-或者烧录文件   烧录地址  (两个blank 是同一个)  DOUT 32Mbit
-eagle.falsh.bin    0x00000
-eagle.irom0text.bin    0x10000
-blank.bin    0x3fb000
-esp_init_data_default_v08.bin   0x3fc000
-blank.bin    0x3fe000
-
-**下载器选值（8266-12F举例）**
-	32Mbit，也就是4M flash ,所以地址分别是 0x3FC000 和 0x3FE000 , 最后2个的烧录文件地址看编译之后结果而决定！
-	四根线选`QIO`，六根线选`DIO`，至于`QOUT`和`DOUT`和`flash`芯片有关，平时最多的是`DIO`或者是`QIO`！
-	
-	https://blog.csdn.net/wowocpp/article/details/81368635  可以看下flash
-	
-![[ESP8266下载器.PNG]]
-![[ESP8266下载器下载完成.PNG]]
-
-![[ESP8266下载器2.PNG]]
-### IDE问题集
-#### 当make clean 时一直报Error: Cannot run program "make": xxxxx  出现PATH:{xxxxxxxx;xxxxxx;xxx}把你的环境变量的内容都打印出来。
-```plaintext
-缘由：
-	记录一下，当正常使用中把1.5 改回1后又改回1.5 。
-	
-经过实验：
-	一直以为是环境变量没改对。但是发现怎么改都无效。最后 把 IDE 存储的工作组文件夹eclipse-workspace 给全删了。发现正常了。
-	
-总结原因：
-	注意是因为把IDE 提示的是否打开改工作区的提示框禁掉了。导致重装时候也不会提示需要把工作区删了。再从C:\Program Files (x86)\AiThinkerIDE_V1.5.2\eclipse 打开eclipse.exe  桌面的那个exe 一般还是从原本的工作区进入，是个bug即使删除了原本的工作区他还会重新生成莫明奇妙。
-	
-```
-#### 当程序没问题前提下，Cygwin GCC 方式导入 build时报什么xtensa-lx106-elf 类似这样的内容的错误，只会是你没有配置Environment 的  CYGWIN_HOME 的value 即 cygwin的路径
-```plaintext
-总结原因:
-	cygwin在你所安装的IDE的目录下如：
-		C:\Program Files (x86)\AiThinkerIDE_V1.5.2\plugin_cygwin
-```
-#### Makefile 错误即环境变量问题，编译链替换：
-```plaintext
-https://blog.csdn.net/m0_50458807/article/details/114915004
-```
-#### 添加快捷键配置环境和下载程序
-```plaintext
-https://blog.csdn.net/weixin_39676479/article/details/119882794?spm=1001.2101.3001.6661.1&utm_medium=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1-119882794-blog-77985541.pc_relevant_3mothn_strategy_recovery&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1-119882794-blog-77985541.pc_relevant_3mothn_strategy_recovery&utm_relevant_index=1
-```
-## 实践篇
-IDE 路径`C:\Program Files (x86)\AiThinkerIDE_V1.5.2\eclipse\eclipse.exe`
-### Ai-ThinkerIDE_V1.5 编译 3.0/2.1.x/2.2.x  SDK版本
-	1、图文教程
-	https://aithinker.blog.csdn.net/article/details/106229281   
-	2、B友视频示例（没啥好看的操作贼拉跨速度极慢，当失败太多怀疑人生时候看下怎么操作。）
-	https://www.bilibili.com/video/av714622779/?vd_source=8c250cc458d476b5cdce2e6ed0343a02
-	3、当bulid时，报 xtensa-lx106-elf-gcc 错误时
-		就是esp8266 的环境变量配成了v5.2.0_for_3.0\xtensa-lx106-elf\bin 。 
-
-```plaintext
-环境变量只要这4个 其余的得删掉
-esp8266 是v5.2.0_for_3.0\bin 。 esp32是xtensa-esp32-elf-5.0\bin 。
-
-	
-C:\Program Files (x86)\AiThinkerIDE_V1.5.2\msys32\mingw32\bin
-C:\Program Files (x86)\AiThinkerIDE_V1.5.2\msys32\opt\esp32\xtensa-esp32-elf-5.0\bin
-C:\Program Files (x86)\AiThinkerIDE_V1.5.2\msys32\opt\esp8266\v5.2.0_for_3.0\bin
-C:\Program Files (x86)\AiThinkerIDE_V1.5.2\msys32\usr\bin
- 
-```
-#### 准备工作
-	不需要什么准备。
-#### 导入时工作 
-	1、导入项目 选择 File→Import ，下面步骤：
-	2、点开C/C++分支，并选中Existing Code as Makefile Project：
-	3、取消C++的勾选，选中 Cross Gcc，点击Browser，选中我们解压后所在的目录。点击finish。
-
-#### 导入后工作（make 以ESP-12F为例）
-	1、Properties --> C/C++ Build --> Build command 中添加编译规则 make COMPILE=gcc BOOT=new APP=1 SPI_SPEED=40 SPI_MODE=DIO SPI_SIZE_MAP=6
-	2、在Properties --> C/C++ Build --> Build directory 选择编译的工程路径，比如根目录下的 IoT_Demo工程。
-	3、 先Clean Project ，后Build Project 。如果Build Project是灰色的，点击一下代码窗口空白处，就不会灰的了。很可能是你之前build运行了其他项目。这样反正我是成功了。
-
-#### 示例项目
-	git clone https://gitee.com/xuhongv/ESP8266_NONOS_SDK
-	1.手动删除根目录下的`driver_lib`和 `third_party`这2个文件夹;
-	2.把 `ESP8266_NONOS_SDK\examples` 内的 `IoT_Demo` 复制到 `ESP8266_NONOS_SDK`
-	3.然后再进行 导入。 
-
-
-
-### Ai-ThinkerIDE_V1.5 编译 2.0 SDK
-	1、图文教程
-	https://blog.csdn.net/weixin_56657463/article/details/124778792
-	https://aithinker.blog.csdn.net/article/details/106229281
-	2、当bulid时，报 xtensa-lx106-elf-gcc 错误时，就是IDE的Environment没配置 cygwin 路径。
-```plaintext
-环境变量只要这3个 其余的得删掉
-C:\Program Files (x86)\AiThinkerIDE_V1.5.2\msys32\usr\bin
-C:\Program Files (x86)\AiThinkerIDE_V1.5.2\plugin_cywin\bin
-C:\Program Files (x86)\AiThinkerIDE_V1.5.2\msys32\opt\esp8266\v4.8.2_for_2.0\bin
-```
-#### 准备工作
-	随Ai-ThinkerIDE_V1.5一起的两个依赖文件。v4.8.2_for_2.0.zip 和 plugin_cygwin.zip
-	根据环境变量看出 放到Ai-ThinkerIDE_V1.5相对的文件内。
-#### 导入时工作
-	1、导入项目 选择 File→Import ，下面步骤：
-	2、点开C/C++分支，并选中Existing Code as Makefile Project：
-	3、取消C++的勾选，选中 Cygwin GCC，点击Browser，选中我们解压后所在的目录。点击finish。
-
-#### 导入后工作
-	1、make COMPILE=gcc BOOT=new APP=1 SPI_SPEED=40 SPI_MODE=DIO SPI_SIZE_MAP=6
-	2、查看Environment 的  CYGWIN_HOME  的 value 把  cygwin 路径填入
-	 `C:\Program Files (x86)\AiThinkerIDE_V1.5.2\plugin_cygwin`然后点apply ，后点确认。 
-	3、 先Clean Project ，后Build Project 。如果Build Project是灰色的，点击一下代码窗口空白处，就不会灰的了。很可能是你之前build运行了其他项目。这样反正我是成功了。
-	
-#### 示例项目 （以半颗心脏的git 2.0的代码示例集合）
-	git clone https://github.com/xuhongv/StudyInEsp8266.git
-	1. 直接按导入去操作就好，代码没问题的。
-
-
-
-
-
-
----
-记录日期:
-  -  2022/11/17
----
-
-## 开始学习示例
-打开 IDE `C:\Program Files (x86)\AiThinkerIDE_V1.5.2\eclipse\eclipse.exe`
-
-https://blog.csdn.net/xh870189248/article/details/78155357  可以跑电路和代码没问题以2.0SDK 来配置导入项目流程
-
-### 8266-12F
-地址范围  `0x000 000 - 0x3ff fff `        每个扇区 `4kb  =1024*4`
-扇区范围    `3ff fff /1024/4  = 4 194 303 /1024/4 = 16383  =3ff `
-所以扇区范围是  `0x000 - 0x3FF`
-
-### 分为  FOTA支持云端升级，和non-FOTA不支持云端升级
-![[ESP8266的bin说明.PNG]]
-![[ESP8266的bin说明NON-FOTA.PNG]]
-```plaintext
-	blank.bin        0x3fb000  // 貌似之前都没弄这个也行
-	blank.bin        0x3fe000
-	esp_init_data_default_v8.bin        0x3fc000
-	eagle.flash.bin        0x00000   // 看编译后的输出显示
-	eagle.irom0text.bin         0x10000    // 看编译后的输出显示
-	26M   40MHZ   DOUT    32Mbit     1152000
-```
-
-
-### ESP8266-12F 烧录 得按RST 才会读取gpio （没自动下载电路才要）
- 先按住 BOOT 再按住RST  再松开RST  再松开BOOT 。下载完再按下RST。
-原因是看规格书
-因为开发板的GPIO0是 接 BOOT 按钮  ，复位应该是让恢复回默认高
-![[ESP8266的开发板bin烧录说明.PNG]]
-
-
-
-### 开发指南
-	区别 51 就是 不是通过 while(1)  用中断去触发具体时间去反复执行。
-	ESP8266是基于内核回调。
-**1、大致主体函数**
-	1、应用函数:必须由另一个函数调用才会执行
-	2、中断函数:发生硬件中断时会调用这个函数
-	3、回调函数:当某系统事件发生时,相点的国调通数由 non-OS SDK内核调用执行
-	4、任务函数:系统空闲的时候执行
-	2、3、4 CPU通过发送的令内部去处理(正因如此,所以問单)
-```c
-void user_init(void) { 
-	// 初始化相关的参数和外设等
-	// 初始化(需要用到哪些功能就进行相关配置,打开一个开关)
-	// 他这里只是预编译后 相当于发送给内核指令， 进入内核处理 。
-}
-
-void xxxx_interrupt() { //如果有中断的话进行中断处理
-//.....中断处理
-}
-
-void xxx_Cb(){//如果有回调通数的话就进入回调两数
-//....回调处理
-}
-
-void xxx_task(){//如果有任务的话进入任务通数
-//....任务处理
-}
-```
-
-**2、函数名规则**
-```plaintext
-应用函数前面加 ICACHE_FLASH_ATTR 宏  和IRAM_ATTR宏
- ICACHE_FLASH_ATTR ： 放flash  比 iRAM 慢  但空间大
- IRAM_ATTR： 放 iRAM  速度快， 但空间小
- 相当于一个是存储芯片 一个是内存芯片
-```
-
-**3、SDK  相当于提供API 可对内核的修改或设置**
-```plaintext
-	需要的是进行 GPIO口初始化、定时器初始化、中断初始化。
-	
-	想通过GPIO口电平变化去执行，可以用外部中断触发模式。
-	想通过周期性每隔多久去执行，可以用配置定时器。
-	
-	中断触发是替代普通的GPIO 电平检测API 。更严谨 避免抖动bug
-	定时器 是替代普通的自定义 延时函数。 更精准
-	
-	外部硬件定时器是比软件定时器更加精准，因为软件定时器会受到 代码的机器周期执行时间而影响。
-
-	定时器、GPIO 都是 用中断方式去构思。
-
-	1、 要到的IO口 配置下模式 
-	2、中断一般得配置寄存器，然后再中断处理函数内封装些业务逻辑。
-	3、尤其是串口中断 配置时用到的 宏 api 寄存器 都比较多，但很简单的。套别人写的模板去改一改就好。主要是思考数据怎么做结构。以及验证数据包是否完整。
-```
-**4、注意 ESP8266_NONOS_SDK_V1.5.2  - v2.2.1 之间的版本，需要 再user_main.c  手动加函数**
-	复制放到 user_main.c  在 init 主函数前面
-```c
- void ICACHE_FLASH_ATTR user_rf_pre_init(void){
-	 //配置ESP8266的射频参数
-	if(!system_partition_table_regist(at_partition_table, sizeof(at_partition_table)/sizeof(at_partition_table[0]),SPI_FLASH_SIZE_MAP)) {
-		os_printf("system_partition_table_regist fail\r\n");
-		while(1);
-	}
- }
- 
- void ICACHE_FLASH_ATTR unit32 user_rf_cal_sector_set(void){
-	 // 配置ESP8266的校准信息
-	enum flash_size_map size_map = system_get_flash_size_map();
-    uint32 rf_cal_sec = 0;
-    switch (size_map) {
-        case FLASH_SIZE_4M_MAP_256_256:rf_cal_sec = 128 - 5;
-            break;
-        case FLASH_SIZE_8M_MAP_512_512:rf_cal_sec = 256 - 5;
-            break;
-        case FLASH_SIZE_16M_MAP_512_512:rf_cal_sec = 512 - 5;
-            break;
-        case FLASH_SIZE_16M_MAP_1024_1024:rf_cal_sec = 512 - 5;
-            break;
-        case FLASH_SIZE_32M_MAP_512_512:rf_cal_sec = 1024 - 5;
-            break;
-        case FLASH_SIZE_32M_MAP_1024_1024:rf_cal_sec = 1024 - 5;
-            break;
-        case FLASH_SIZE_64M_MAP_1024_1024:rf_cal_sec = 2048 - 5;
-            break;
-        case FLASH_SIZE_128M_MAP_1024_1024:rf_cal_sec = 4096 - 5;
-            break;
-        default:
-            rf_cal_sec = 0;
-            break;
-    }
-    return rf_cal_sec;
- }
-```
-**5、注意 坑**
-```plaintext
-//像  uint32_t  这些都是在 c_types.h内定义的
-//像 sint8_t 、 int8_t 、int8、 sint8 、s8 五种写法都是 signed char 的简写
-//像 uint8 、uint8_t 、u8  三种写法都是 unsigned char
-//而 
-//像 uint32_t  带 t的都是 long    uint32 不带t 是int   注意坑
-```
-
+### 忘记了就来这里看下
+	gpio配置刚接触会迷糊。分为GPIO引脚宏、寄存器宏、中断宏、寄存器api、引脚配置api、中断api、和常用的配置值的宏。 宏一般是以所有gpio整体为思路，配合位移的写法就是配置某一个gpio。
 #### 1、GPIO(配套示例GPIO_Input)
 **注意：**
 	ESP8266-12F 自身的那个小蓝色LED的阴极是接在 GPIO2， 阳极是接VCC 。它受内核管控，即使操作了也会被内核给覆盖亮灭。
@@ -355,12 +21,11 @@ void xxx_task(){//如果有任务的话进入任务通数
 /*说明
 	参数一表示 引脚， 参数二表示作为普通IO口/第二功能IO口
 	参数一：
-		如GPIO5  对应是MTDO_U
-		如GPIO12  对应是MTDI_U
-		最后加前缀 PERIPHS_IO_MUX_MTDO_U   ，PERIPHS_IO_MUX_MTDI_U
+		1、如GPIO5  对应是MTDO_U。 如GPIO12  对应是MTDI_U
+		2、最后加前缀 PERIPHS_IO_MUX_MTDO_U ，PERIPHS_IO_MUX_MTDI_U
 	参数二：(有两种表达方式)
-		计算，查表普通GPIO5的普通IO口是Function4，则 4-1 = 3 。-1是因为从Function1开始算 由单片机都是从0 开始计数所以-1。
-		加前缀，GPIO5的普通IO口是  FUNC_GPIO5   (宏定义在eagle_soc.h) 
+		1、计算，查表普通GPIO5的普通IO口是Function4，则 4-1 = 3 。-1是因为从Function1开始算 由单片机都是从0 开始计数所以-1。
+		2、加前缀（官方提供的更方便的写法），GPIO5的普通IO口是  FUNC_GPIO5   (宏定义在eagle_soc.h) 
 		
 	//GPIO5管脚设置为普通IO口功能，查表是Function4，那么值需要-1就是3。
 PIN_FUNC_SELECT(PERIPHS_IO_MUX_MTDO_U,3);
@@ -369,7 +34,7 @@ PIN_FUNC_SELECT(PERIPHS_IO_MUX_MTDO_U,1);
 	//GPIO12脚设置为普通IO口
 PIN_FUNC_SELECT(PERIPHS_IO_MUX_MTDI_U, FUNC_GPIO12)
 
-	如何查表 如GPIO15是MTDO_U ，看表找到MTDO_U的那一行 ，Function 就是引脚类型
+	
 */
 PIN_FUNC_SELECT(PIN_NAME,FUNC)  //引脚名字，管脚的功能  
 
@@ -380,7 +45,7 @@ PIN_FUNC_SELECT(PIN_NAME,FUNC)  //引脚名字，管脚的功能
 */
 GPIO_OUTPUT_SET(GPIO_ID_PIN(2),0) //  设置GPIO2为输出模式，输出低电平
 ```
-
+如何查表 如GPIO15是MTDO_U ，看表找到MTDO_U的那一行 ，Function 就是引脚类型
 	![[ESP8266的GPIO对应的名称.PNG]]
 	![[ESP8266的GPIO对应的名称查表.PNG]]
 	
@@ -405,9 +70,10 @@ gpio_output_set(BIT12,BIT13,BIT12|BIT13,0)
 //设置 GPIO12 为输⼊
 gpio_output_set(0,0,0,BIT12)
 
-//举例  即 设置 4种组合 00  01 10 11  
-// 1<<0|1<<4,0,1<<0|1<<4,0 =  00010001 ,0 ,00010001 ,0   pin0 pin4 输出高电平
-
+/*举例  即 设置 4种组合 00  01 10 11  
+ 1<<0|1<<4,0,1<<0|1<<4,0 =  00010001 ,0 ,00010001 ,0   pin0 pin4 输出高电平
+*/
+// pin0 pin4 输出高电平
 #define I2C_MASTER_SDA_HIGH_SCL_HIGH()  \
     gpio_output_set(1<<I2C_MASTER_SDA_GPIO | 1<<I2C_MASTER_SCL_GPIO, 0, 1<<I2C_MASTER_SDA_GPIO | 1<<I2C_MASTER_SCL_GPIO, 0)
 
@@ -427,9 +93,9 @@ gpio_output_set(0,0,0,BIT12)
 ##### GPIO相关寄存器
 一、寄存器读写函数
 ```c
-//GPIO口寄存器的读/写 函数  参数根据业务寄存器  
-gpio_status= GPIO_REG_READ(GPIO_STATUS_ADDRESS);
-GPIO_REG_WRITE(GPIO_STATUS_W1TC_ADDRESS, gpio_status);  
+//GPIO口寄存器的读/写 函数，参数根据业务寄存器。  
+gpio_status= GPIO_REG_READ(GPIO_STATUS_ADDRESS); //先从外部拿到数据
+GPIO_REG_WRITE(GPIO_STATUS_W1TC_ADDRESS, gpio_status); //再修改寄存器
 ```
 二、GPIO 输出寄存器 
 ```c
@@ -477,13 +143,13 @@ gpio16_input_get(void){
 	4、获取GPIO12管脚的电平状态
 ```c
 /*
-本质上是对PERIPHS_IO_MUX_MTDI_U寄存器的第4位和第5位置1
+本质上是对PERIPHS_IO_MUX_MTDI_U寄存器的第4位和第5位，置1。
 */
 PIN_FUNC_SELECT(PERIPHS_IO_MUX_MTDI_U, FUNC_GPIO12); //GPIO12 为普通IO口
 
 /*
-本质上是对GPIO_ENABLE_W1TS 的寄存器第12位写1，表示使能gpio12输出功能
-本质上是对GPIO_OUT_W1TS 的寄存器第12位写1，表示将gpio12输出为高电平
+本质上是对GPIO_ENABLE_W1TS 的寄存器第12位写1，表示使能gpio12输出功能。
+本质上是对GPIO_OUT_W1TS 的寄存器第12位写1，表示将gpio12输出为高电平。
 */
 GPIO_OUTPUT_SET(GPIO_ID_PIN(12), 1); //GPIO12 输出高电平
 
@@ -509,7 +175,6 @@ level = GPIO_INPUT_GET(GPIO_ID_PIN(12));//获取GPIO12管脚的电平状态
 ```c
 #include "eagle_soc.h"
 #include  "gpio.h"
-
 //配置管脚
 PIN_FUNC_SELECT(PERIPHS_IO_MUX_GPIO2_U, FUNC_GPIO2);
 
@@ -529,7 +194,7 @@ GPIO_OUTPUT_SET(GPIO_ID_PIN(12), 0);
 //喂狗
 system_soft_wait_feed(); 
 ```
-外设初始化示例
+外设初始化示例（封装初始化写法）
 ```c
 driver_lib/driver/Peripherals.c
 //LED GPIO初始化
@@ -550,10 +215,9 @@ PIN_FUNC_SELECT (PERIPHS_IO_MUX_MTCK_U, FUNC_GPIO13) ; //设置GPIO15管脚的�
 GPIO_OUTPUT_SET (GPIO_ID_PIN (13), 0) ;//设置GPIO为输出模式设置GPIO输出电平为高电平
 }
 ```
-调用示例
+调用示例（main.c调用）
 ```c
-void ICACHE FLASH ATTR 
-user _init (void)
+void ICACHE_FLASH ATTR user_init (void)
 {
 	LED_GPIO_Init (); //LED GPIO引脚初始化
 	FM_GPIO_Init (); //蜂鸣器GPIO初始化
@@ -574,7 +238,6 @@ user _init (void)
 }
 ```
 
-
 #### 2、UART(配套示例UART)
 **参考文档：（p63）**
 	esp8266-technical_reference_cn.pdf
@@ -584,8 +247,8 @@ user _init (void)
 **共10bit**  1起始 8bit 1停止，`11520个/秒 *10 = 115200bps`
 **校验位**
 ```plaintext
-奇校验：10101001  则  凑1变成奇数个101010011 
-偶校验：10101001 则  凑1变成偶数个101010010
+奇校验：10101001 则 凑1变成奇数个101010011 
+偶校验：10101001 则 凑1变成偶数个101010010
 0校验 ：直接拼接0
 1校验 ：直接拼接1
 无校验则不加
@@ -606,7 +269,7 @@ system_uart_swap(){
 	esp8266-F 有两个分别是UART0 和 UART1，烧录默认用UART0。
 	UART0 默认开启，UART1默认关闭。 
 	ESP8266芯片本身支持26MHz 和40MHz 的晶振，若使用40MHz晶振，则默认波特率为115200，若使用26MHz晶振，则UART0上电后的波特率 = 26*115200/40 = 74880。
-	安信可的ESP8266系列模组均使用26MHz，由于一般的串口工具不会支持这个波特率，所以上电时会有打印乱码。得用带有74880的串口助手
+	安信可的ESP8266系列模组均使用26MHz，由于一般的串口工具不会支持这个波特率，所以上电时会有打印乱码。得用带有74880的串口助手（安信可有提供）。
 ```
 **UART0、UART1区别**
 ```plaintext
@@ -864,7 +527,7 @@ GPIO_REG_WRITE(GPIO_STATUS_W1TC_ADDRESS, gpio_status);//清除中断标志位
 ```
 
 ##### GPIO中断示例(如GPIO5作为key,搭配个中断作为自动触发逻辑)
-	这里以key.c 为demo，123是必须要的，34的内容根据实际业务去写，但基本有模板，加ICACHE_FLASH_ATTR 是目的存储起来。 
+	这里以key.c 为demo，123是必须要的，34的内容根据实际业务去写，但基本有模板。 
 	1、先初始化用作key的GPIO
 	2、去初始化配置搭配的key的中断
 	3、去定义key触发中断时的中断服务函数
@@ -2683,8 +2346,7 @@ void ICACHE_FLASH_ATTR WIFI_TCP_Init(void)
 		1、VCC、SDA、SCL、GND
 		2、SDA 是数据总线，SCL 是时钟总线
 		3、SDA、SCL 分别加一个上拉电阻到VCC
-		4、同时连接设备数量由电容累计最大400pF,通常不超过8个设备。
-		
+		4、同时连接设备数量由电容累计最大400pF,通常不超过8个设备。（除了开发板和大项目，小项目通常用1-2个设备屏幕和存储器）。
 	时序：
 		1、起始信号：SCL=1,SDA=1->0;
 		2、结束信号：SCL=1,SDA=0->1;
@@ -2694,7 +2356,7 @@ void ICACHE_FLASH_ATTR WIFI_TCP_Init(void)
 	5、响应（ack包），接收设备收到数据给发送方一个，ack表示继续接收，nack 表示不接收了。ack:SCL=1,SDA=0;   nack:SCL=0,SDA=1;
 	
 	说明:
-		1、i2c_master.c 只封装i2c协议时序，通过对寄存器设置电平，和保持时常。
+		1、i2c_master.c 只封装i2c协议时序，通过对寄存器设置电平，和保持电平时常。
 ##### i2c时序示例(i2c_master.c)
 	组合: 起始信号+地址与方向+响应+数据包+响应+...+结束信号 
 ```c 
@@ -2871,7 +2533,7 @@ void ICACHE_FLASH_ATTR i2c_master_init(void){
     return;
 }
 
-//初始化GPIO
+//初始化GPIO   用到大量的宏和api
 void ICACHE_FLASH_ATTR i2c_master_gpio_init(void){
     ETS_GPIO_INTR_DISABLE() ;//关闭 GPIO 中断
 //	ETS_INTR_LOCK();
@@ -2897,7 +2559,7 @@ void ICACHE_FLASH_ATTR i2c_master_gpio_init(void){
 
 ##### i2c时序示例(oled.c)
 	1、oled.c oled由驱动SSD1306芯片是分为寄存器部分和显示部分。需要借助i2c的有效数据即byte 来传输给oled 地址、寄存器、值，进行初始化oled使能电路。开关每个坐标使其发亮或熄灭。
-	2、128*64个点，列128，行64 。
+	2、128*64个点，列128，行64。
 	3、ESP8266只能做主设备，不能做从设备。
 ```C
 // 向OLED写入命令
@@ -2939,5 +2601,203 @@ uint8_t ICACHE_FLASH_ATTR I2C_WriteByte(uint8_t addr,uint8_t data)
 
 	i2c_master_stop();		//发送结束信号
 	return 0;
+}
+```
+
+#### 13、SNTP 获取网络时间(配套示例SNTP) 
+**了解：**
+```plaintext
+SNTP是一种协议，客户端/服务器的工作方式，通常多台SNTP服务器以防服务器故障。
+	1、单播（点对点）模式，定期去服务器拿时间，达到同步。
+	2、广播（一点对多点）模式 ，服务器周期性地发送消息给指定的 IP 广播地址或者 IP 多播地址。客户端通过监听地址来获取。
+	3、常规的SNTP服务器网站
+		us.pool.ntp.org
+		ntp.sjtu.edu.cn
+
+串口显示
+no found, reconnect after 1s reconnect STATION_CONNECTING
+表示wifi连接失败 账户或密码不对
+```
+##### 基础熟记
+	1、SNTP 接口位于 /ESP8266_NONOS_SDK/include/sntp.h
+	2、设置 SNTP 服务器域名，一共最多支持 3 个 SNTP 服务器
+	3、通过 IP 地址设置 SNTP 服务器，最多支持 3 个 SNTP 服务器
+	4、SNTP 初始化，设置完服务器之后需要调用此函数进行初始化配置
+	5、查询当前距离基准时间 (1970.01.01 00:00:00 GMT+8)的时间戳单位：秒
+		5.1、以伦敦为基准时间 + 中国东八区的误差时间 
+		5.2、时间戳在线转换 https://tool.lu/timestamp/
+	6、根据时间戳计算实际时间（GMT+8）
+	7、设置时区信息
+```c 
+#include  sntp.h
+
+//设置 SNTP 服务器域名，一共最多支持 3 个 SNTP 服务器
+sntp_setservername(0,"us.pool.ntp.org");//设置 0 号服务器域名
+sntp_setservername(1,"ntp.sjtu.edu.cn"); //设置 1 号服务器域名 备用
+
+//通过 IP 地址设置 SNTP 服务器，最多支持 3 个 SNTP 服务器
+ipaddr_aton("210.72.145.44", addr);
+sntp_setserver(0, addr); //设置 0 号服务器 IP 地址
+
+//SNTP 初始化，设置完服务器之后需要调用此函数进行初始化配置
+void sntp_init(void)
+
+//查询当前距离基准时间 (1970.01.01 00:00:00 GMT+8)的时间戳单位：秒
+uint32 sntp_get_current_timestamp(void)
+
+//根据时间戳计算实际时间（GMT+8）
+ string beijingshijian = char* sntp_get_real_time(long t)
+
+//设置时区信息
+bool sntp_set_timezone (sint8 timezone) 
+
+
+// 注意调用顺序 举个例子
+sntp_stop();  //先拿时间
+if( true==sntp_set_timezone(-5) ){  //再去校对
+	sntp_init();  //最后去初始化
+}
+```
+##### 示例
+主函数->wifi去连接自己的网络实现通信->去连接sntp服务器->定时获取->解析
+```c
+//sntp.c
+#include "./driver/user_sntp.h"
+#include "sntp.h"
+#include "./driver/os_timer.h"
+
+
+void ICACHE_FLASH_ATTR ESP8266_SNTP_Init(void)
+{
+	ip_addr_t* server_addr;
+
+	//设置SNTP服务器
+	sntp_setservername(0,"us.pool.ntp.org");	//设置0号服务器
+	sntp_setservername(1,"ntp.sjtu.edu.cn");	//设置1号服务器
+	ipaddr_aton("210.72.145.44", server_addr); //210.72.145.44 也是一个服务器
+	sntp_setserver(3, server_addr);				//设置2号服务器
+
+	sntp_init();		//sntp初始化   SDK库函数对内核的一些操作
+
+	OS_Timer_SNTP_Init(1000,1);	//调用sntp定时器获取网络时间
+}
+
+```
+得配置wifi为STA模式 去连接我们的路由器wifi上网
+```c
+//WIFI STA模式初始化配置
+void ICACHE_FLASH_ATTR WIFI_STA_Mode_Init(void)
+{
+	struct	station_config STA_Config_Struct;
+	struct ip_info sta_ip_info;
+
+	wifi_set_opmode(0x01);		//配置WiFi为STA模式
+
+	os_strcpy(STA_Config_Struct.ssid,WIFI_SSID);			//WiFi名称
+	os_strcpy(STA_Config_Struct.password,WIFI_PASS);		//WiFi密码
+
+	wifi_station_set_config(&STA_Config_Struct); //相当于把配置信息写进去wifi模块寄存器内
+}
+```
+主函数
+```c
+/******************************************************************************
+ * FunctionName : user_init
+ * Description  : entry of user application, init user function here
+ * Parameters   : none
+ * Returns      : none
+*******************************************************************************/
+void ICACHE_FLASH_ATTR
+user_init(void)
+{ 
+	WIFI_STA_Mode_Init();	//配置为STA模式
+	//不马上去执行
+	OS_Timer_Init(1000,1);	//软件定时器初始化  1s执行一次
+} 
+```
+定时器
+```c
+//软件定时器配置初始化
+void ICACHE_FLASH_ATTR OS_Timer_Init(uint32_t ms,bool repeat_flag)
+{
+	os_timer_disarm(&os_timer_1);					//关闭软件定时器
+	os_timer_setfn(&os_timer_1,(os_timer_func_t*)OS_Timer_1_Cb,NULL);	//注册软件定时回调函数  目的：只有是STATION_GOT_IP 获取到IP地址，把地址读出来进行打印。然后去进行连接SNTP服务器。
+	os_timer_arm(&os_timer_1,ms,repeat_flag);		//打开软件定时器并设置定时时间以及是否重复
+} 
+```
+
+```c
+//软件定时器1回调函数
+void ICACHE_FLASH_ATTR OS_Timer_1_Cb(void)
+{
+	uint8_t sta_status=0;
+	struct	ip_info STA_IP_Info;
+	uint8_t ESP8266_IP[4]={0};
+
+	sta_status=wifi_station_get_connect_status();
+
+	switch(sta_status)
+	{
+	case STATION_IDLE:	//空闲
+		os_printf("STATION_IDLE\r\n");
+		break;
+	case STATION_CONNECTING:	//正在连接
+		os_printf("STATION_CONNECTING\r\n");
+		break;
+	case STATION_WRONG_PASSWORD://密码错误
+		os_printf("STATION_WRONG_PASSWORD\r\n");
+		break;
+	case STATION_NO_AP_FOUND:	//没有发现AP
+		os_printf("STATION_NO_AP_FOUND\r\n");
+		break;
+	case STATION_CONNECT_FAIL:	//连接错误
+		os_printf("STATION_CONNECT_FAIL\r\n");
+		break;
+	case STATION_GOT_IP:		//获取到IP地址
+		os_printf("STATION_GOT_IP\r\n");
+		break;
+	}
+
+	if(sta_status==STATION_GOT_IP)		//如果连接成功
+	{
+		wifi_get_ip_info(STATION_IF,&STA_IP_Info);
+		ESP8266_IP[0]=STA_IP_Info.ip.addr;		//将32位IP地址采用点分十进制进行分割
+		ESP8266_IP[1]=STA_IP_Info.ip.addr>>8;
+		ESP8266_IP[2]=STA_IP_Info.ip.addr>>16;
+		ESP8266_IP[3]=STA_IP_Info.ip.addr>>24;
+		os_printf("ESP8266 STA Mode Config OK!\r\n");
+		os_printf("IP:%d.%d.%d.%d\r\n",ESP8266_IP[0],
+										ESP8266_IP[1],
+										ESP8266_IP[2],
+										ESP8266_IP[3]);
+		os_timer_disarm(&os_timer_1);	//关闭软件定时器
+		/*1、去连接SNTP服务器 2、定时去获取*/
+		ESP8266_SNTP_Init();	//配置SNTP
+	}
+}
+```
+sntp定时器
+```c
+//SNTP软件定时器回调函数
+void ICACHE_FLASH_ATTR OS_Timer_SNTP_Cb(void)
+{
+	uint32_t timestamp=0;			//存放时间戳
+	char *current_time_buf=NULL;	//存放当前时间字符串
+
+	timestamp=sntp_get_current_timestamp();		//获取现在的时间戳
+	if(timestamp!=0){
+		current_time_buf=sntp_get_real_time(timestamp);	//时间戳转化为当前时间
+		os_printf("\r\ntimestamp=%d   Current Time:%s\r\n",timestamp,current_time_buf); 
+	}
+	else	//获取网络时间失败
+		os_printf("SNTP get current time failed!\r\n");
+}
+
+//SNTP软件定时器初始化
+void ICACHE_FLASH_ATTR OS_Timer_SNTP_Init(uint32_t ms,bool repeat_flag)
+{
+	os_timer_disarm(&os_timer_sntp);					//关闭软件定时器
+	os_timer_setfn(&os_timer_sntp,(os_timer_func_t*)OS_Timer_SNTP_Cb,NULL);	//注册软件定时回调函数
+	os_timer_arm(&os_timer_sntp,ms,repeat_flag);		//打开软件定时器并设置定时时间以及是否重复
 }
 ```

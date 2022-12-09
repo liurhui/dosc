@@ -17,7 +17,7 @@ Legacy version - 历史版本
 
 sudo yum install yum-utils
 vim /etc/yum.repos.d/nginx.repo
-```yum
+```json
 
 
 [nginx-stable]

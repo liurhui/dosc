@@ -9,7 +9,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "前端框架/AngularJS/文件说明.md",
+            "file": "nginx.md",
             "mode": "source",
             "source": false
           }
@@ -53,8 +53,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 240.5,
-    "collapsed": true
+    "width": 240.5
   },
   "right": {
     "id": "eae31176a4c920b8",
@@ -70,7 +69,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "前端框架/AngularJS/文件说明.md",
+                "file": "nginx.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -98,15 +97,15 @@
   },
   "active": "54bb44a1f175f147",
   "lastOpenFiles": [
-    "前端框架/AngularJS/4_三个页面语法.md",
+    "终端/git入门.md",
+    "单片机/ESP8266/基础篇.md",
+    "单片机/单片机通用常识.md",
     "前端框架/AngularJS/文件说明.md",
+    "前端框架/AngularJS/4_三个页面语法.md",
     "基础知识.md",
     "javascrpit/入门基础.md",
     "javascrpit/正则表达式.md",
     "javascrpit/基础对象备忘.md",
-    "javascrpit/1数组.md",
-    "Java/Maven.md",
-    "css/1样式基础写法.md",
-    "css/选择器权值.md"
+    "javascrpit/1数组.md"
   ]
 }
