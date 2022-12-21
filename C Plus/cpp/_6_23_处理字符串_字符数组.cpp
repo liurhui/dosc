@@ -42,6 +42,7 @@ s[i]    访问串下标为i的字符
     bool s4 = (sl < s2); //结果是true
     char s5 = s2[1]; //结果是 'e'
 ***********/
+#if 0
 #pragma region  示例6-23string类应用举例
 #include <string> 
 #include <iostream>
@@ -142,3 +143,18 @@ void insert (char text [], int index, char ins)
         text [index] = ins;
 }
 #pragma endregion
+
+#endif
+#include <iostream>
+#include <vector>
+#include <string>
+using namespace std;
+int main()
+{
+    vector<string> msg {"Hello", "C++", "World", "from", "VS Code", "and the C++ extension!"};
+ for (const string& word : msg)
+ {
+        cout << word << " ";
+ }
+    cout << endl;
+}

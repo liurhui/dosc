@@ -4,22 +4,35 @@
     "type": "split",
     "children": [
       {
-        "id": "2cf02b06967b4395",
+        "id": "faa2e4fd300a1063",
         "type": "tabs",
         "children": [
           {
-            "id": "bf5af49ff2d34275",
+            "id": "16822c2d30488009",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "终端/git入门.md",
+                "file": "C Plus/常见词汇说明.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "531b8a08ce119b17",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "C Plus/5_数据的共享与保护.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -61,7 +74,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 256.5
   },
   "right": {
     "id": "eae31176a4c920b8",
@@ -104,17 +117,85 @@
     "width": 300,
     "collapsed": true
   },
-  "active": "bf5af49ff2d34275",
+  "floating": {
+    "id": "27eb3e9b9e6557d1",
+    "type": "floating",
+    "children": [
+      {
+        "id": "3f0283d76abe94e6",
+        "type": "window",
+        "children": [
+          {
+            "id": "3ffc79d5c47a0468",
+            "type": "tabs",
+            "children": [
+              {
+                "id": "8809a805a5009d21",
+                "type": "leaf",
+                "state": {
+                  "type": "markdown",
+                  "state": {
+                    "file": "C Plus/常见词汇说明.md",
+                    "mode": "source",
+                    "source": false
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "direction": "vertical",
+        "x": 286,
+        "y": 87,
+        "width": 1024,
+        "height": 800,
+        "maximize": false,
+        "zoom": 0
+      },
+      {
+        "id": "ee1cb33726ab99d1",
+        "type": "window",
+        "children": [
+          {
+            "id": "493d523431f0c7a7",
+            "type": "tabs",
+            "children": [
+              {
+                "id": "b59401fd493d6ef3",
+                "type": "leaf",
+                "state": {
+                  "type": "markdown",
+                  "state": {
+                    "file": "终端/git入门.md",
+                    "mode": "source",
+                    "source": false
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "direction": "vertical",
+        "x": 762,
+        "y": 130,
+        "width": 1024,
+        "height": 800,
+        "maximize": false,
+        "zoom": 0
+      }
+    ]
+  },
+  "active": "b59401fd493d6ef3",
   "lastOpenFiles": [
+    "C Plus/5_数据的共享与保护.md",
+    "C Plus/常见词汇说明.md",
+    "C Plus/4_类与对象.md",
+    "C Plus/管道pipe、fifo、映射mmap.md",
+    "C Plus/图片/虚拟继承的构造顺序截图.png",
+    "单片机/ESP8266/API_9_网络时间_SNTP.md",
     "单片机/ESP8266/1_搭建环境.md",
-    "单片机/ESP8266/2_API备忘.md",
-    "README.md",
-    "nginx.md",
-    "终端/node 常用指令.md",
-    "终端/IDE使用集合.md",
-    "终端/keil.md",
-    "终端/vscode.md",
-    "面包屑.md",
-    "基础知识.md"
+    "单片机/ESP8266/API_1_GPIO.md",
+    "单片机/ESP8266/API_8_IIC_Oled.md",
+    "单片机/ESP8266/API_7_WIFI.md"
   ]
 }
